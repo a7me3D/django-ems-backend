@@ -91,5 +91,8 @@ class ProfileUpdateView(generic.UpdateView):
 class EmployeeDeleteView(generic.DeleteView):
     template_name = "employee_delete.html"
 
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse("users:employee-view")
