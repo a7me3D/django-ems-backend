@@ -5,7 +5,7 @@ from .models import Formation
 
 
 class FormationListView(generic.ListView):
-    template_name = "formation-view.html"
+    template_name = "formation_view.html"
     context_object_name = "formations"
     model = Formation
 
@@ -42,3 +42,9 @@ class FormationDeleteView(generic.DeleteView):
 
     def get_success_url(self):
         return reverse("formations:formation-view")
+
+
+class FormationDetailView(generic.DetailView):
+    model = Formation
+    template_name = 'formation_detail.html'
+    context_object_name = "formation"
