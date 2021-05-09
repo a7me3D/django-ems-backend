@@ -3,10 +3,14 @@ from users.models import Employee
 from django.utils import timezone
 
 
-class Criteria(models.Model):
+class CriteriaType(models.Model):
     title = models.CharField(max_length=100)
-    rating = models.IntegerField()
-    comment = models.TextField()
+
+
+class Criteria(models.Model):
+    title = models.ForeignKey(CriteriaType, on_delete=models.CASCADE)
+    rating = models.IntegerField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
 
 
 class Evaluation(models.Model):
