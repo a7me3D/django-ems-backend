@@ -10,5 +10,6 @@ urlpatterns = [
     path('auth/', include("django.contrib.auth.urls")),
     path('users/', include("users.urls", namespace="users")),
     path('formations/', include("formations.urls", namespace="formations")),
-    path('recruitments/', include("recruitments.urls", namespace="recruitments"))
+    path('recruitments/', include("recruitments.urls", namespace="recruitments")),
+    path('evaluations/', include("evaluations.urls", namespace="evaluations"))
 ]
