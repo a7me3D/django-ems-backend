@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <form method="post">
+      <p>{{form.start_period}} {{form.end_period}}</p>
+      {% csrf_token %} {{ formset.management_form }}
+        {% for form in formset %}
+        {{ form }}<br><br>
+        {% endfor %}
+
+        <input type="submit" value="ajouter" />
+      </p>
+    </form>
+  </body>
+</html>
