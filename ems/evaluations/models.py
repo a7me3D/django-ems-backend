@@ -10,8 +10,10 @@ class Criteria(models.Model):
 
 
 class Evaluation(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    evaluator = models.ForeignKey(Employee)
-    start_period = models.DateField(default=timezone.now())
-    end_period = models.DateField(default=timezone.now())
+    employee = models.ForeignKey(
+        Employee, on_delete=models.CASCADE, related_name="employee")
+    evaluator = models.ForeignKey(
+        Employee, on_delete=models.RESTRICT, related_name="evaluator")
+    start_period = models.DateField(default=timezone.now)
+    end_period = models.DateField(default=timezone.now)
     criteria = models.ManyToManyField(Criteria)
