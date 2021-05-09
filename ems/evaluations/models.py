@@ -6,6 +6,9 @@ from django.utils import timezone
 class CriteriaType(models.Model):
     title = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.title
+
 
 class Criteria(models.Model):
     title = models.ForeignKey(CriteriaType, on_delete=models.CASCADE)
