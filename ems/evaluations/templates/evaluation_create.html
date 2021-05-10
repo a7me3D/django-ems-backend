@@ -1,6 +1,11 @@
 <html>
+<style>
+  select{pointer-events: none;}
+</style>
   <body>
     <form method="post">
+      <h3> Evaluation </h3>
+      <p> {{employee.first_name}} {{employee.last_name}} ({{employee.get_poste_display}})
       <p>{{form.start_period}} {{form.end_period}}</p>
       {% csrf_token %} {{ formset.management_form }}
         {% for form in formset %}

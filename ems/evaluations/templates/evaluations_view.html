@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <h2>Evaluations</h2>
+    <ul>
+      {% for evaluation in evaluations %}
+      <li>
+        {{ evaluation.employee.first_name }} {{ evaluation.employee.last_name }}
+        - periode de {{ evaluation.start_period }} a {{ evaluation.end_period }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
