@@ -28,14 +28,14 @@ class HomeView(LoginRequiredMixin, generic.View):
 
 
 class EmployeeListView(generic.ListView):
-    template_name = "employee-view.html"
+    template_name = "employee_view.html"
     context_object_name = "employees"
     model = Employee
 
 
 class ProfileDetailView(generic.DetailView):
     model = Employee
-    template_name = 'profile-view.html'
+    template_name = 'profile_view.html'
     context_object_name = "employee"
 
     def get_object(self):
