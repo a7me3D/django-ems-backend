@@ -1,0 +1,13 @@
+<html>
+  <body>
+    <h2>Finances</h2>
+    <ul>
+      {% for finance in finances %}
+      <li>
+        {{ finance.employee.first_name }} {{ finance.employee.last_name }} -
+        {{finance.get_doc_type_display }} - {{ finance.get_status_display }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
