@@ -1,15 +1,6 @@
 from django.db import models
 from users.models import Employee
 
-# employee + fonction
-# type ( demande de prêt/demande d'avance sur salaire)
-# montant
-# motif
-# nombre d'echeances
-# avis_chef: bool
-# avis_RF: bool
-# status (en attente/accepte/refuse)
-
 
 class FinanceDoc(models.Model):
     DOC_TYPE = [
