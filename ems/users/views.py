@@ -1,5 +1,5 @@
-from django.shortcuts import render, reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views import generic
@@ -96,3 +96,19 @@ class EmployeeDeleteView(generic.DeleteView):
 
     def get_success_url(self):
         return reverse("users:employee-view")
+
+
+class EmployeeActivateView(generic.View):
+    def get(self, request, *args, **kwargs):
+        user = Employee.objects.get(pk=self.kwargs.get("pk"))
+        user.is_active = True
+        user.save()
+        return HttpResponseRedirect(reverse("users:employee-view"))
+
+
+class EmployeeDesactivateView(generic.View):
+    def get(self, request, *args, **kwargs):
+        user = Employee.objects.get(pk=self.kwargs.get("pk"))
+        user.is_active = False
+        user.save()
+        return HttpResponseRedirect(reverse("users:employee-view"))
