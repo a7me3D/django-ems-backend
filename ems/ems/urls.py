@@ -12,5 +12,6 @@ urlpatterns = [
     path('formations/', include("formations.urls", namespace="formations")),
     path('recruitments/', include("recruitments.urls", namespace="recruitments")),
     path('evaluations/', include("evaluations.urls", namespace="evaluations")),
-    path('finances/', include("finance.urls", namespace="finances"))
+    path('finances/', include("finance.urls", namespace="finances")),
+    path('conges/', include("conges.urls", namespace="conges"))
 ]
