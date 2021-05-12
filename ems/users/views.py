@@ -59,7 +59,7 @@ class EmployeeUpdateView(generic.UpdateView):
 
     fields = ["email", "first_name", "last_name", "adresse",
               "ville", "code_postal", "nationnalite", "date_naissance", "lieu_naissance",
-              "sexe", "cin", "chef", "poste", "is_active"]
+              "sexe", "cin", "chef", "poste"]
 
     def get_success_url(self):
         return reverse("users:employee-view")
