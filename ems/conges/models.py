@@ -33,7 +33,7 @@ class Conge(models.Model):
 
     @property
     def days(self):
-        return self.end_date - self.start_date
+        return (self.end_date - self.start_date).days
 
 
 class CongeTitle(models.Model):

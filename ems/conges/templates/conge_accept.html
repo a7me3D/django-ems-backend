@@ -1,0 +1,11 @@
+<html>
+  <body>
+    {{conge.days}} jours de {{conge.start_date}} a {{conge.end_date}} <br />
+    solde:{{solde}} jour <br />
+    reste:{{reste }} jour
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <input type="submit" value="ajouter" />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h2>{{ conge.get_conge_type_display }}</h2>
+    <ul>
+      <li>
+        {{ conge.employee.first_name }} {{ conge.employee.last_name }} -
+        {{conge.employee.get_poste_display }} {{conge.employee.cin }}
+      </li>
+      <li>de {{ conge.start_date }} a {{ conge.end_date }}</li>
+      <li></li>
+      <li>nb de jours{{ conge.days }}</li>
+    </ul>
+  </body>
+</html>

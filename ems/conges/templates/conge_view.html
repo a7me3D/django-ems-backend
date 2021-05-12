@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <h2>Conges</h2>
+    <ul>
+      solde: {{solde}}
+      <br />
+      {% for conge in conges %}
+      <li>
+        {{ conge.employee.first_name }} {{ conge.employee.last_name }} -
+        {{conge.get_conge_type_display }} - {{ conge.get_status_display }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
