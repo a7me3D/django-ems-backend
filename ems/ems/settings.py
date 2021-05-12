@@ -128,3 +128,6 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.Employee'
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/auth/login'
+
+# custom auth
+AUTHENTICATION_BACKENDS = ('users.backend.EmailBackend',)
