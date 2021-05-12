@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import Employee
 
+from .forms import SignupForm
+
 
 class HomeView(LoginRequiredMixin, generic.View):
     login_url = "/auth/login"
@@ -14,7 +16,7 @@ class HomeView(LoginRequiredMixin, generic.View):
         "RI": 'users:employee-view',
         "CH": '',
         "RF": '',
-        "RH": '',
+        "RH": 'users:user-home',
     }
 
     def get(self, request):
@@ -32,6 +34,12 @@ class EmployeeListView(generic.ListView):
     context_object_name = "employees"
     model = Employee
 
+    def get_queryset(self):
+        if self.request.user.poste == "RH":
+            return Employee.objects.filter(poste="S")
+        else:
+            return Employee.objects.all()
+
 
 class ProfileDetailView(generic.DetailView):
     model = Employee
@@ -44,9 +52,8 @@ class ProfileDetailView(generic.DetailView):
 
 class EmployeeCreationView(generic.CreateView):
     model = Employee
-    fields = ["email", "first_name", "last_name", "adresse",
-              "ville", "code_postal", "nationnalite", "date_naissance", "lieu_naissance",
-              "sexe", "cin", "chef", "poste", "password"]
+    form_class = SignupForm
+
     template_name = "employee_create.html"
 
     def get_success_url(self):
@@ -56,10 +63,7 @@ class EmployeeCreationView(generic.CreateView):
 class EmployeeUpdateView(generic.UpdateView):
     template_name = "employee_update.html"
     queryset = Employee.objects.all()
-
-    fields = ["email", "first_name", "last_name", "adresse",
-              "ville", "code_postal", "nationnalite", "date_naissance", "lieu_naissance",
-              "sexe", "cin", "chef", "poste"]
+    form_class = SignupForm
 
     def get_success_url(self):
         return reverse("users:employee-view")
