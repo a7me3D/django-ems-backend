@@ -14,12 +14,22 @@ class Conge(models.Model):
         ("M", "maladie"),
         ("R", "recuperation"),
     ]
+
+    STATUS_TYPE = [
+        ("P", "En attente"),
+        ("A", "Accepté"),
+        ("R", "Refusé"),
+    ]
+
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     demand_date = models.DateField(default=timezone.now)
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=one_day_hence)
     conge_type = models.CharField(
         max_length=1, choices=CONGE_TYPE, default=CONGE_TYPE[0][0])
+
+    status = models.CharField(
+        max_length=2, choices=STATUS_TYPE, default=STATUS_TYPE[0][0])
 
     @property
     def days(self):
