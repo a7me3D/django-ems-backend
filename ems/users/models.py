@@ -31,4 +31,6 @@ class Employee(AbstractUser):
     sexe = models.CharField(max_length=1, choices=SEXE, default=SEXE[0][0])
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+
+    username = None
+    REQUIRED_FIELDS = []
