@@ -29,10 +29,12 @@ class Employee(AbstractUser):
     sexe = models.CharField(max_length=1, choices=SEXE, default=SEXE[0][0])
 
     USERNAME_FIELD = 'email'
-
-    username = None
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["username"]
 
     @property
     def evaluated(self):
         return Evaluation.objects.filter(employee__id=self.id).count()
+
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        super(Employee, self).save(*args, **kwargs)
