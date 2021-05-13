@@ -8,23 +8,23 @@ class CongeListView(generic.ListView):
     template_name = 'conge_view.html'
     context_object_name = "conges"
 
-
-class CongeEmployeeListView(generic.ListView):
-    model = Conge
-    template_name = 'conge_view.html'
-    context_object_name = "conges"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         conge_count = CongeTitle.objects.filter(
             conge__employee=self.request.user).count()
+        print(conge_count)
         if conge_count > 0:
-            context["solde"] = CongeTitle.objects.last().solde
+            context["solde"] = CongeTitle.objects.last().rest
         else:
             context["solde"] = 30
+
         return context
 
     def get_queryset(self):
+        if self.request.user.poste == "RH":
+            return Conge.objects.all()
+
         return Conge.objects.filter(employee=self.request.user)
 
 
@@ -34,7 +34,7 @@ class CongeCreationView(generic.CreateView):
     fields = ["start_date", "end_date", "conge_type"]
 
     def get_success_url(self):
-        return reverse("conges:conge-employee")
+        return reverse("conges:conge-view")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -55,7 +55,7 @@ class CongeUpdateView(generic.UpdateView):
     fields = ["start_date", "end_date", "conge_type"]
 
     def get_success_url(self):
-        return reverse("conges:conge-employee")
+        return reverse("conges:conge-view")
 
 
 class CongeDeleteView(generic.DeleteView):
@@ -66,7 +66,7 @@ class CongeDeleteView(generic.DeleteView):
         return self.post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse("conges:conge-employee")
+        return reverse("conges:conge-view")
 
 
 class CongeAcceptView(generic.CreateView):
@@ -94,10 +94,11 @@ class CongeAcceptView(generic.CreateView):
         conge.save()
 
         conge_count = CongeTitle.objects.filter(
-            conge__employee=self.request.user).count()
+            conge__employee=conge.employee).count()
         if conge_count > 0:
-            last_conge = CongeTitle.objects.last()
-            conge_title.solde = last_conge
+            last_conge = CongeTitle.objects.filter(
+                conge__employee=conge.employee).last()
+            conge_title.solde = last_conge.rest
         conge_title.save()
         return HttpResponseRedirect(reverse("conges:conge-view"))
 
