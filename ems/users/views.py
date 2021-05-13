@@ -8,25 +8,8 @@ from .models import Employee
 from .forms import SignupForm
 
 
-class HomeView(LoginRequiredMixin, generic.View):
-    login_url = "/auth/login"
-
-    ROLE_BASED_REDIRECT = {
-        "S": '',
-        "RI": 'users:employee-view',
-        "CH": '',
-        "RF": '',
-        "RH": 'users:user-home',
-    }
-
-    def get(self, request):
-        user = request.user
-        if user.is_authenticated:
-            user_role = str(user.poste)
-            return HttpResponseRedirect(reverse(self.ROLE_BASED_REDIRECT[user_role]))
-
-        else:
-            return HttpResponseRedirect("auth/login")
+class HomeView(LoginRequiredMixin, generic.TemplateView):
+    template_name = "home.html"
 
 
 class EmployeeListView(generic.ListView):
@@ -79,7 +62,7 @@ class ProfileUpdateView(generic.UpdateView):
 
     fields = ["email", "first_name", "last_name", "adresse",
               "ville", "code_postal", "nationnalite", "date_naissance", "lieu_naissance",
-              "sexe", "cin", "chef", "poste"]
+              "sexe", "cin", "poste"]
 
     def get_object(self):
         return Employee.objects.get(pk=self.request.user.id)
