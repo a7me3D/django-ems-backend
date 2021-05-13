@@ -25,7 +25,7 @@ class Employee(AbstractUser):
         default=timezone.now)
     lieu_naissance = models.CharField(max_length=300)
     email = models.EmailField(unique=True)
-    poste = models.CharField(max_length=2, choices=ROLE, default=ROLE[0][0])
+    poste = models.CharField(max_length=2, choices=ROLE, default=ROLE[1][0])
     sexe = models.CharField(max_length=1, choices=SEXE, default=SEXE[0][0])
 
     USERNAME_FIELD = 'email'
