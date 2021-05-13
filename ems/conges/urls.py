@@ -4,7 +4,6 @@ app_name = "conges"
 
 urlpatterns = [
     path('', CongeListView.as_view(), name="conge-view"),
-    path('me', CongeEmployeeListView.as_view(), name="conge-employee"),
     path('create', CongeCreationView.as_view(), name="conge-create"),
     path('<int:pk>', CongeDetailView.as_view(), name="conge-detail"),
     path('<int:pk>/update/', CongeUpdateView.as_view(),
