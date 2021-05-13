@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from evaluations.models import Evaluation
 
 
 class Employee(AbstractUser):
@@ -31,3 +32,7 @@ class Employee(AbstractUser):
 
     username = None
     REQUIRED_FIELDS = []
+
+    @property
+    def evaluated(self):
+        return Evaluation.objects.filter(employee__id=self.id).count()
