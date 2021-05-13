@@ -22,9 +22,9 @@ class Conge(models.Model):
     ]
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    demand_date = models.DateField(default=timezone.now)
-    start_date = models.DateField(default=timezone.now)
-    end_date = models.DateField(default=one_day_hence)
+    demand_date = models.DateField(default=timezone.now, blank=False)
+    start_date = models.DateField(default=timezone.now, blank=False)
+    end_date = models.DateField(default=one_day_hence, blank=False)
     conge_type = models.CharField(
         max_length=1, choices=CONGE_TYPE, default=CONGE_TYPE[0][0])
 

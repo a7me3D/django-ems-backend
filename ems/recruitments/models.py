@@ -16,7 +16,7 @@ class Recruitment(models.Model):
     poste = models.CharField(max_length=100, blank=False)
     poste_type = models.CharField(
         max_length=100, choices=POSTE, default=POSTE[0][0])
-    poste_description = models.TextField()
-    motivation = models.TextField()
-    exp_requise = models.TextField()
-    formation_requise = models.TextField()
+    poste_description = models.TextField(blank=False)
+    motivation = models.TextField(blank=False)
+    exp_requise = models.TextField(blank=False)
+    formation_requise = models.TextField(blank=False)

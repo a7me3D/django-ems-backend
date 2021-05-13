@@ -11,8 +11,8 @@ class CriteriaType(models.Model):
 
 class Criteria(models.Model):
     title = models.ForeignKey(CriteriaType, on_delete=models.CASCADE)
-    rating = models.IntegerField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
+    rating = models.IntegerField(blank=False)
+    comment = models.TextField(blank=False)
 
 
 class Evaluation(models.Model):
@@ -20,6 +20,6 @@ class Evaluation(models.Model):
         "users.Employee", on_delete=models.CASCADE, related_name="employee")
     evaluator = models.ForeignKey(
         "users.Employee", on_delete=models.RESTRICT, related_name="evaluator")
-    start_period = models.DateField(default=timezone.now)
-    end_period = models.DateField(default=timezone.now)
+    start_period = models.DateField(default=timezone.now, blank=False)
+    end_period = models.DateField(default=timezone.now, blank=False)
     criteria = models.ManyToManyField(Criteria)
