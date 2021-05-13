@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='criteria',
             name='rating',
-            field=models.IntegerField(default=' '),
+            field=models.IntegerField(default=0),
             preserve_default=False,
         ),
     ]
