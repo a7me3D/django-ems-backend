@@ -49,8 +49,15 @@ class EvaluationDetailView(generic.DetailView):
     context_object_name = "evaluation"
 
     def get_object(self):
-        evaluation = Evaluation.objects.filter(
-            employee=self.request.user.id).last()
+        try:
+            pk = self.kwargs["pk"]
+            evaluation = Evaluation.objects.filter(
+                employee=pk).last()
+
+        except:
+            evaluation = Evaluation.objects.filter(
+                employee=self.request.user.id).last()
+
         return evaluation
 
 
