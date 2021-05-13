@@ -22,7 +22,7 @@ class FinanceCreationView(generic.CreateView):
     model = Finance
     template_name = "finance_create.html"
     fields = ["doc_type", "montant", "motif",
-              "nb_echeances", "avis_chef", "avis_rf", ]
+              "nb_echeances", "avis_rf", ]
 
     def get_success_url(self):
         return reverse("finances:finance-employee")
@@ -44,7 +44,7 @@ class FinanceUpdateView(generic.UpdateView):
     model = Finance
     template_name = "finance_update.html"
     fields = ["doc_type", "montant", "motif",
-              "nb_echeances", "avis_chef", "avis_rf", ]
+              "nb_echeances", "avis_rf", ]
 
     def get_success_url(self):
         return reverse("finances:finance-employee")

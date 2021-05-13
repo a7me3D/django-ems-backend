@@ -8,7 +8,7 @@ class SignupForm(forms.ModelForm):
 
         fields = ["email", "first_name", "last_name", "adresse",
                   "ville", "code_postal", "nationnalite", "date_naissance", "lieu_naissance",
-                  "sexe", "cin", "chef", "poste", "password"]
+                  "sexe", "cin", "poste", "password"]
 
         widgets = {
             'password': forms.PasswordInput()

@@ -7,7 +7,6 @@ class Employee(AbstractUser):
     ROLE = [
         ("S", 'Salarie'),
         ("RI", 'Responsable Informatique'),
-        ("CH", 'Chef Hierarchique'),
         ("RF", 'Responsable Financier'),
         ("RH", 'Responsable ressources Humaines'),
     ]
@@ -25,8 +24,6 @@ class Employee(AbstractUser):
         blank=True, default=timezone.now)
     lieu_naissance = models.CharField(max_length=300, blank=True)
     email = models.EmailField(blank=True, unique=True)
-    chef = models.ForeignKey(
-        "self", on_delete=models.CASCADE, null=True, related_name="hierarchy_chef")
     poste = models.CharField(max_length=2, choices=ROLE, default=ROLE[0][0])
     sexe = models.CharField(max_length=1, choices=SEXE, default=SEXE[0][0])
 

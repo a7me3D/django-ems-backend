@@ -20,7 +20,6 @@ class FinanceDoc(models.Model):
         null=False, blank=False, decimal_places=3, max_digits=6)
     motif = models.TextField(null=False, blank=False)
     nb_echeances = models.IntegerField(null=False, blank=False)
-    avis_chef = models.BooleanField()
     avis_rf = models.BooleanField()
     status = models.CharField(
         max_length=2, choices=STATUS_TYPE, default=STATUS_TYPE[0][0])
