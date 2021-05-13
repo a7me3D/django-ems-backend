@@ -1,12 +1,13 @@
 <html>
   <body>
     <p>
-      Evalue par: {{evaluation.evaluator.first_name}}
+      {% if evaluation %} Evalue par: {{evaluation.evaluator.first_name}}
       {{evaluation.evaluator.last_name}}
     </p>
     <p>date de {{evaluation.start_period}} a {{evaluation.end_period}}</p>
+    <p>Critere du l'evaluation:</p>
     {% for criteria in evaluation.criteria.all%}
     <p>{{criteria.title}}({{criteria.rating}}) {{criteria.comment}}</p>
-    {% endfor %}
+    {% endfor %} {% else %} Pas d'evaluation {% endif %}
   </body>
 </html>

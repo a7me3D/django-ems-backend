@@ -5,13 +5,13 @@
   <body>
     <form method="post">
       <h3> Evaluation </h3>
-      <p> {{employee.first_name}} {{employee.last_name}} ({{employee.get_poste_display}})
-      <p>{{form.start_period}} {{form.end_period}}</p>
+      <p> Nom et prenom du l'employe {{employee.first_name}} {{employee.last_name}} ({{employee.get_poste_display}})
+      <p>periode du {{form.start_period}} a {{form.end_period}}</p>
       {% csrf_token %} {{ formset.management_form }}
+        <p>Critere du l'evaluation</p>
         {% for form in formset %}
         {{ form }}<br><br>
         {% endfor %}
-
         <input type="submit" value="ajouter" />
       </p>
     </form>

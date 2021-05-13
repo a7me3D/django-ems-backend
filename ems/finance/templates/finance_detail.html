@@ -3,14 +3,16 @@
     <h2>{{ finance.get_doc_type_display }}</h2>
     <ul>
       <li>
-        {{ finance.employee.first_name }} {{ finance.employee.last_name }} -
-        {{finance.employee.get_poste_display }}
+        Nom et prenom: {{ finance.employee.first_name }}
+        {{finance.employee.last_name }}
       </li>
-      <li>{{ finance.montant }}</li>
-      <li>{{ finance.motif }}</li>
-      <li>{{ finance.nb_echeances }}</li>
-      <li>{{ finance.avis_rf }}</li>
-      <li>{{ finance.status }}</li>
+
+      <li>Poste: {{finance.employee.get_poste_display}}</li>
+      <li>Montant: {{ finance.montant }}</li>
+      <li>Motif: {{ finance.motif }}</li>
+      <li>Nombre d'echeance{{ finance.nb_echeances }}</li>
+      <li>Avis Responsable ressource humaine{{ finance.avis_rf }}</li>
+      <li>Status: {{ finance.status }}</li>
     </ul>
   </body>
 </html>

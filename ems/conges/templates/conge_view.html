@@ -1,13 +1,28 @@
 <html>
   <body>
     <h2>Conges</h2>
+    <a href={% url 'conges:conge-create' %}> ajouter </a>
     <ul>
       solde: {{solde}}
       <br />
       {% for conge in conges %}
       <li>
-        {{ conge.employee.first_name }} {{ conge.employee.last_name }} -
-        {{conge.get_conge_type_display }} - {{ conge.get_status_display }}
+        Nom et prenom: {{ conge.employee.first_name }} 
+        {{conge.employee.last_name }} - type: {{conge.get_conge_type_display }} -
+        {{conge.get_status_display }}
+        {% if user.poste == "RH" %}
+          {% if conge.status == "P"  %}
+            <a href={% url 'conges:conge-accept' conge.pk %}>accepte</a> -
+            <a href={% url 'conges:conge-reject' conge.pk %}>refuse</a>
+          {% endif %}
+        {% endif %}
+        {% if user.pk == conge.employee.pk  %}
+          {% if conge.status == "P"  %}
+            <a href={% url 'conges:conge-update' conge.pk %}>modifie</a> -
+            <a href={% url 'conges:conge-delete' conge.pk %}>supprimer</a>
+          {% endif %}
+        {% endif %}
+        -<a href={% url 'conges:conge-detail' conge.pk %}>voir</a>
       </li>
       {% endfor %}
     </ul>

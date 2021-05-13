@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <h1>Accueil</h1>
+    <li><a href= {% url 'users:profile-detail' %}> profile </a></li>
+    <li><a href= {% url 'conges:conge-view' %}> conge </a></li>
+    <li><a href= {% url 'finances:finance-view' %}> finance </a></li>
+
+    {% if user.poste == "RH" %}
+    <li><a href= {% url 'users:employee-view' %}> evaluation </a></li>
+    <li><a href= {% url 'conges:conge-view' %}> conge </a></li>
+    <li><a href= {% url 'formations:formation-view' %}> formation </a></li>
+    <li><a href= {% url 'recruitments:recruitment-view' %}> recrutment </a></li>
+    {% endif %}
+
+    {% if user.poste == "S" %}
+    <li><a href= {% url 'formations:formation-view' %}> formation </a></li>
+    <li><a href= {% url 'recruitments:recruitment-view' %}> recrutment </a></li>
+        <li><a href= {% url 'evaluations:evaluation-detail' %}> evaluation </a></li>
+
+    {% endif %}
+
+    {% if user.poste == "RI" %}
+    <li><a href= {% url 'users:employee-view' %}> users </a></li>
+    {% endif %}
+  </body>
+</html>

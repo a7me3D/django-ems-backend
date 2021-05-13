@@ -5,7 +5,9 @@
       {% for evaluation in evaluations %}
       <li>
         {{ evaluation.employee.first_name }} {{ evaluation.employee.last_name }}
-        - periode de {{ evaluation.start_period }} a {{ evaluation.end_period }}
+        - periode de {{ evaluation.start_period }} a {{ evaluation.end_period }} - 
+          <a href={% url "evaluations:evaluation-detail" evaluation.employee.pk%} > voir </a>
+          <a href={% url "evaluations:evaluation-delete" evaluation.employee.pk%} > supprimer </a>
       </li>
       {% endfor %}
     </ul>

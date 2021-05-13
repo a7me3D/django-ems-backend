@@ -1,11 +1,25 @@
 <html>
   <body>
     <h2>Finances</h2>
+    <a href={% url 'finances:finance-create' %} > ajouter </a>
     <ul>
       {% for finance in finances %}
       <li>
         {{ finance.employee.first_name }} {{ finance.employee.last_name }} -
-        {{finance.get_doc_type_display }} - {{ finance.get_status_display }}
+        {{finance.get_doc_type_display }} - {{ finance.get_status_display }} 
+        {% if finance.employee.id == user.id  %}
+          {% if finance.status == "P" %}
+            <a href={% url 'finances:finance-update' finance.pk %}> modifier </a> - 
+            <a href={% url 'finances:finance-delete' finance.pk %}> supprimer </a>
+          {% endif %}
+        {% endif %}
+        {% if user.poste == "RF" %}
+          {% if finance.status == "P" %}
+            -<a href={% url 'finances:finance-accept' finance.pk %}> accepte </a> - 
+            <a href={% url 'finances:finance-reject' finance.pk %}> refuse </a>
+          {% endif %}
+        {% endif %}
+            - <a href={% url 'finances:finance-detail' finance.pk %}> voir </a>
       </li>
       {% endfor %}
     </ul>

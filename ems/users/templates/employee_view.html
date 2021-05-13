@@ -1,9 +1,25 @@
 <html>
   <body>
     <h2>Employees</h2>
+    {% if user.poste == "RI" %} <a href={% url "users:employee-create"%} >ajouter </a> {% endif %}
     <ul>
       {% for employee in employees %}
-      <li>{{ employee.username }}</li>
+      <li>Nom et prenom: {{ employee.first_name }} {{ employee.last_name }} - poste: {{ employee.get_poste_display }} 
+      {% if user.poste == "RI" %}
+      {% if employee.is_active  %} <a href={% url "users:employee-desactivate" employee.pk%} > bloque </a> 
+      {% else %}
+      <a href={% url "users:employee-activate" employee.pk%} > debloque </a> 
+      {% endif %}
+      - <a href={% url "users:employee-update" employee.pk%} > modifier </a>
+      {% elif user.poste == "RH" %}
+      {% if employee.evaluated > 0 %}
+      <a href={% url "evaluations:evaluation-delete" employee.pk%} > supprimer l'evaluation </a>
+      {% else %}
+      <a href={% url "evaluations:evaluation-create" employee.pk%} > evaluer </a>
+      {% endif %}
+      {% endif %}
+      </li>
+
       {% endfor %}
     </ul>
   </body>
