@@ -8,14 +8,11 @@ class FinanceListView(generic.ListView):
     template_name = 'finance_view.html'
     context_object_name = "finances"
 
-
-class FinanceEmployeeListView(generic.ListView):
-    model = Finance
-    template_name = 'finance_view.html'
-    context_object_name = "finances"
-
     def get_queryset(self):
-        return Finance.objects.filter(employee=self.request.user)
+        if self.request.user.poste == "RF":
+            return Finance.objects.all()
+        else:
+            return Finance.objects.filter(employee=self.request.user)
 
 
 class FinanceCreationView(generic.CreateView):
@@ -25,7 +22,7 @@ class FinanceCreationView(generic.CreateView):
               "nb_echeances", "avis_rf", ]
 
     def get_success_url(self):
-        return reverse("finances:finance-employee")
+        return reverse("finances:finance-view")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -47,7 +44,7 @@ class FinanceUpdateView(generic.UpdateView):
               "nb_echeances", "avis_rf", ]
 
     def get_success_url(self):
-        return reverse("finances:finance-employee")
+        return reverse("finances:finance-view")
 
 
 class FinanceDeleteView(generic.DeleteView):
@@ -58,7 +55,7 @@ class FinanceDeleteView(generic.DeleteView):
         return self.post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse("finances:finance-employee")
+        return reverse("finances:finance-view")
 
 
 class FinanceAcceptView(generic.View):

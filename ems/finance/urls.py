@@ -4,7 +4,6 @@ app_name = "finances"
 
 urlpatterns = [
     path('', FinanceListView.as_view(), name="finance-view"),
-    path('me', FinanceEmployeeListView.as_view(), name="finance-employee"),
     path('create', FinanceCreationView.as_view(), name="finance-create"),
     path('<int:pk>', FinanceDetailView.as_view(), name="finance-detail"),
     path('<int:pk>/update/', FinanceUpdateView.as_view(),
