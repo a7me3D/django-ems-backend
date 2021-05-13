@@ -22,8 +22,6 @@ class EmployeeListView(generic.ListView):
 
     def get_queryset(self):
         if self.request.user.poste == "RH":
-            return Employee.objects.filter(poste="S")
-        else:
             return Employee.objects.all()
 
 
