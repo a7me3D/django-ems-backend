@@ -1,5 +1,4 @@
 from django.db import models
-from users.models import Employee
 from django.utils import timezone
 
 
@@ -18,9 +17,9 @@ class Criteria(models.Model):
 
 class Evaluation(models.Model):
     employee = models.ForeignKey(
-        Employee, on_delete=models.CASCADE, related_name="employee")
+        "users.Employee", on_delete=models.CASCADE, related_name="employee")
     evaluator = models.ForeignKey(
-        Employee, on_delete=models.RESTRICT, related_name="evaluator")
+        "users.Employee", on_delete=models.RESTRICT, related_name="evaluator")
     start_period = models.DateField(default=timezone.now)
     end_period = models.DateField(default=timezone.now)
     criteria = models.ManyToManyField(Criteria)
