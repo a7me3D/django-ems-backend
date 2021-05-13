@@ -7,6 +7,8 @@
 
     {% if user.poste == "RH" %}
     <li><a href= {% url 'users:employee-view' %}> evaluation </a></li>
+    <li><a href= {% url 'users:employee-view' %}> employe </a></li>
+
     <li><a href= {% url 'conges:conge-view' %}> conge </a></li>
     <li><a href= {% url 'formations:formation-view' %}> formation </a></li>
     <li><a href= {% url 'recruitments:recruitment-view' %}> recrutment </a></li>
