@@ -2,9 +2,15 @@
 
 <body>
   <h2>Recruitments</h2>
+  {% if user.poste == "RH" %} <a href={% url 'recruitments:recruitment-create' %}> ajouter </a>{% endif %}
   <ul>
     {% for recruitment in recruitments %}
-    <li>{{ recruitment.direction }}</li>
+    <li>{{ recruitment.direction }} - {{ recruitment.date_demande }} - <a href={% url 'recruitments:recruitment-detail' recruitment.pk %}> voir </a</li>
+    {% if user.poste == "RH" %}
+     <a href={% url 'recruitments:recruitment-update' recruitment.pk %}> modifier </a>
+     <a href={% url 'recruitments:recruitment-delete' recruitment.pk %}> supprimer </a>
+     {% endif %}
+
     {% endfor %}
   </ul>
 </body>

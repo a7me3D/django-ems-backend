@@ -2,9 +2,17 @@
 
 <body>
   <h2>Formations</h2>
+  {% if user.poste == "RH" %} <a href={% url 'formations:formation-create' %}> ajouter </a>{% endif %}
+
   <ul>
     {% for formation in formations %}
-    <li>{{ formation.titre }}</li>
+    <li>{{ formation.titre }} ({{formation.genre}}) par {{formation.formateur}} - 
+    <a href={% url 'formations:formation-detail' formation.pk %}> voir </a>
+    {% if user.poste == "RH" %}
+     <a href={% url 'formations:formation-update' formation.pk %}> modifier </a>
+     <a href={% url 'formations:formation-delete' formation.pk %}> supprimer </a>
+    {% endif %}
+    </li>
     {% endfor %}
   </ul>
 </body>
