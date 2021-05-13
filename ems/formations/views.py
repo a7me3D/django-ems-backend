@@ -3,13 +3,18 @@ from django.shortcuts import render, reverse
 from django.views import generic
 from .models import Formation
 
+from users.decorators import allowed_users
+from django.utils.decorators import method_decorator
 
+
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FormationListView(generic.ListView):
     template_name = "formation_view.html"
     context_object_name = "formations"
     model = Formation
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class FormationCreationView(generic.CreateView):
     model = Formation
     fields = ["titre", "genre", "jour", "formateur", "duree", "lieu", "sujet"]
@@ -19,6 +24,7 @@ class FormationCreationView(generic.CreateView):
         return reverse("formations:formation-view")
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class FormationUpdateView(generic.UpdateView):
     template_name = "formation_update.html"
     queryset = Formation.objects.all()
@@ -33,6 +39,7 @@ class FormationUpdateView(generic.UpdateView):
         return super(FormationUpdateView, self).form_valid(form)
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class FormationDeleteView(generic.DeleteView):
     template_name = "formation_delete.html"
     queryset = Formation.objects.all()
@@ -44,6 +51,7 @@ class FormationDeleteView(generic.DeleteView):
         return reverse("formations:formation-view")
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FormationDetailView(generic.DetailView):
     model = Formation
     template_name = 'formation_detail.html'

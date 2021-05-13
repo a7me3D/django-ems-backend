@@ -3,13 +3,18 @@ from django.shortcuts import render, reverse
 from django.views import generic
 from .models import Recruitment
 
+from users.decorators import allowed_users
+from django.utils.decorators import method_decorator
 
+
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class RecruitmentListView(generic.ListView):
     template_name = "recruitment_view.html"
     context_object_name = "recruitments"
     model = Recruitment
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class RecruitmentCreationView(generic.CreateView):
     model = Recruitment
     fields = ["direction", "responsable", "date_demande", "poste", "poste_type",
@@ -20,6 +25,7 @@ class RecruitmentCreationView(generic.CreateView):
         return reverse("recruitments:recruitment-view")
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class RecruitmentUpdateView(generic.UpdateView):
     template_name = "recruitment_update.html"
     queryset = Recruitment.objects.all()
@@ -35,6 +41,7 @@ class RecruitmentUpdateView(generic.UpdateView):
         return super(RecruitmentUpdateView, self).form_valid(form)
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class RecruitmentDeleteView(generic.DeleteView):
     template_name = "recruitment_delete.html"
     queryset = Recruitment.objects.all()
@@ -46,6 +53,7 @@ class RecruitmentDeleteView(generic.DeleteView):
         return reverse("recruitments:recruitment-view")
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class RecruitmentDetailView(generic.DetailView):
     model = Recruitment
     template_name = 'recruitment_detail.html'

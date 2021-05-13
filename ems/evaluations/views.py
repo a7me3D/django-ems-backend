@@ -4,7 +4,11 @@ from users.models import Employee
 from .models import Evaluation, Criteria, CriteriaType
 from .forms import CriteriaFormSet
 
+from users.decorators import allowed_users
+from django.utils.decorators import method_decorator
 
+
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class EvaluationCreationView(generic.CreateView):
     model = Evaluation
     template_name = "evaluation_create.html"
@@ -43,6 +47,7 @@ class EvaluationCreationView(generic.CreateView):
         return super(EvaluationCreationView, self).form_valid(form)
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class EvaluationDetailView(generic.DetailView):
     model = Evaluation
     template_name = 'evaluation_detail.html'
@@ -61,12 +66,14 @@ class EvaluationDetailView(generic.DetailView):
         return evaluation
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class EvaluationListView(generic.ListView):
     model = Evaluation
     template_name = 'evaluations_view.html'
     context_object_name = "evaluations"
 
 
+@method_decorator(allowed_users(["RH"]), name='dispatch')
 class EvaluationDeleteView(generic.DeleteView):
     template_name = "evaluation_delete.html"
     queryset = Evaluation.objects.all()

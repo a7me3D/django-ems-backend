@@ -2,7 +2,10 @@ from django.shortcuts import reverse, HttpResponseRedirect
 from django.views import generic
 from .models import FinanceDoc as Finance
 
+from users.decorators import allowed_users
+from django.utils.decorators import method_decorator
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FinanceListView(generic.ListView):
     model = Finance
     template_name = 'finance_view.html'
@@ -15,6 +18,7 @@ class FinanceListView(generic.ListView):
             return Finance.objects.filter(employee=self.request.user)
 
 
+@method_decorator(allowed_users(["RF"]), name='dispatch')
 class FinanceCreationView(generic.CreateView):
     model = Finance
     template_name = "finance_create.html"
@@ -31,12 +35,14 @@ class FinanceCreationView(generic.CreateView):
         return super(FinanceCreationView, self).form_valid(form)
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FinanceDetailView(generic.DetailView):
     model = Finance
     template_name = 'finance_detail.html'
     context_object_name = "finance"
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FinanceUpdateView(generic.UpdateView):
     model = Finance
     template_name = "finance_update.html"
@@ -47,6 +53,7 @@ class FinanceUpdateView(generic.UpdateView):
         return reverse("finances:finance-view")
 
 
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FinanceDeleteView(generic.DeleteView):
     template_name = "formation_delete.html"
     queryset = Finance.objects.all()
@@ -58,6 +65,7 @@ class FinanceDeleteView(generic.DeleteView):
         return reverse("finances:finance-view")
 
 
+@method_decorator(allowed_users(["RF"]), name='dispatch')
 class FinanceAcceptView(generic.View):
     def get(self, request, *args, **kwargs):
         doc = Finance.objects.get(pk=self.kwargs.get("pk"))
@@ -66,6 +74,7 @@ class FinanceAcceptView(generic.View):
         return HttpResponseRedirect(reverse("finances:finance-view"))
 
 
+@method_decorator(allowed_users(["RF"]), name='dispatch')
 class FinanceRejectView(generic.View):
     def get(self, request, *args, **kwargs):
         doc = Finance.objects.get(pk=self.kwargs.get("pk"))
