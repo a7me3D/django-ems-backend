@@ -5,6 +5,7 @@ from django.forms import modelformset_factory
 
 class CriteriaForm(forms.ModelForm):
     # title = forms.ModelChoiceField(queryset=CriteriaType.objects.all())
+    rating = forms.IntegerField(max_value=3, min_value=0)
 
     def __init__(self, *args, **kwargs):
         super(CriteriaForm, self).__init__(*args, **kwargs)
