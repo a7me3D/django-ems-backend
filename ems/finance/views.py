@@ -18,7 +18,7 @@ class FinanceListView(generic.ListView):
             return Finance.objects.filter(employee=self.request.user)
 
 
-@method_decorator(allowed_users(["RF"]), name='dispatch')
+@method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
 class FinanceCreationView(generic.CreateView):
     model = Finance
     template_name = "finance_create.html"
