@@ -133,8 +133,5 @@ LOGOUT_REDIRECT_URL = '/auth/login'
 # custom auth
 AUTHENTICATION_BACKENDS = ('users.backend.EmailBackend',)
 
-#STATIC_ROOT = (os.path.join(SITE_ROOT, 'static_files/'))
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
-
-print(STATIC_DIR)
