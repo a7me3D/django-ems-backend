@@ -21,8 +21,7 @@ class EmployeeListView(generic.ListView):
     model = Employee
 
     def get_queryset(self):
-        if self.request.user.poste == "RH":
-            return Employee.objects.all()
+        return Employee.objects.all()
 
 
 @method_decorator(allowed_users(["RI", "RH", "S", "RF"]), name='dispatch')
@@ -73,11 +72,7 @@ class ProfileUpdateView(generic.UpdateView):
         return Employee.objects.get(pk=self.request.user.id)
 
     def get_success_url(self):
-        return reverse("users:employee-view")
-
-    def form_valid(self, form):
-        form.save()
-        return super(EmployeeUpdateView, self).form_valid(form)
+        return reverse("users:profile-detail")
 
 
 @method_decorator(allowed_users(["RI"]), name='dispatch')
