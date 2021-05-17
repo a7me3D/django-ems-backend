@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -131,3 +132,9 @@ LOGOUT_REDIRECT_URL = '/auth/login'
 
 # custom auth
 AUTHENTICATION_BACKENDS = ('users.backend.EmailBackend',)
+
+#STATIC_ROOT = (os.path.join(SITE_ROOT, 'static_files/'))
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR]
+
+print(STATIC_DIR)
